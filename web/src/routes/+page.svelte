@@ -20,6 +20,14 @@
 			description: '柔らかい配色と丸み。タブレット優先のシンプル構成。',
 			accent: '#FF8A65',
 			preview: 'bg-[#FFF8F3] border border-[#FF8A65]/30'
+		},
+		{
+			id: 'd',
+			name: 'Editorial Press',
+			description: '新聞・文芸誌の誌面のように読ませる、書簡集スタイル。',
+			accent: '#C8312D',
+			preview:
+				'bg-[#F5F1E8] border-y-2 border-double border-[#0E0E0E] [background-image:radial-gradient(circle_at_1px_1px,#0E0E0E_1px,transparent_0)] [background-size:6px_6px]'
 		}
 	];
 </script>
@@ -27,10 +35,10 @@
 <div class="flex min-h-screen flex-col items-center justify-center bg-neutral-50 p-8">
 	<header class="mb-12 text-center">
 		<h1 class="mb-3 text-4xl font-bold text-neutral-900">Chat App デザイン比較</h1>
-		<p class="text-neutral-600">3つのデザイン案からお選びください</p>
+		<p class="text-neutral-600">4つのデザイン案からお選びください</p>
 	</header>
 
-	<div class="grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-3">
+	<div class="grid w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
 		{#each designs as d (d.id)}
 			<a
 				href={`/design-${d.id}/login`}
