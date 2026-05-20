@@ -17,6 +17,7 @@ Chatwork ライクなチャットアプリの UI/UX 検証のため、視覚的�
 ## 3. Design Directions
 
 ### Design A: Classic Chatwork
+
 情報密度重視、ビジネス向け。
 
 - レイアウト: 3 ペイン
@@ -27,6 +28,7 @@ Chatwork ライクなチャットアプリの UI/UX 検証のため、視覚的�
 - タブレット縦向きは情報密度の都合上想定外（横向き必須）
 
 ### Design B: Modern Workspace
+
 モダン、広めの余白、Slack/Discord 寄り。
 
 - レイアウト: 2 ペイン
@@ -36,6 +38,7 @@ Chatwork ライクなチャットアプリの UI/UX 検証のため、視覚的�
 - 設定 / 退会チャットはドロワー / モーダル中心
 
 ### Design C: Friendly Minimal
+
 柔らかい配色、丸み、タブレット優先。
 
 - レイアウト: 単一カラム + 折りたたみサイドバー
@@ -115,31 +118,31 @@ src/
 
 ```ts
 type User = {
-  id: string;
-  nickname: string;
-  avatarUrl: string;
-  birthDate: string;     // YYYY-MM-DD
-  email: string;
+	id: string;
+	nickname: string;
+	avatarUrl: string;
+	birthDate: string; // YYYY-MM-DD
+	email: string;
 };
 
 type Chat = {
-  id: string;
-  name: string;
-  iconUrl: string;
-  memberIds: string[];
-  lastMessageAt: string; // ISO
-  unreadCount: number;
-  isArchived: boolean;   // true = 退会済み
+	id: string;
+	name: string;
+	iconUrl: string;
+	memberIds: string[];
+	lastMessageAt: string; // ISO
+	unreadCount: number;
+	isArchived: boolean; // true = 退会済み
 };
 
 type Message = {
-  id: string;
-  chatId: string;
-  senderId: string;
-  createdAt: string;     // ISO
-  type: 'text' | 'image' | 'video';
-  body: string;          // text 本文 or メディア URL
-  thumbnailUrl?: string; // video 用
+	id: string;
+	chatId: string;
+	senderId: string;
+	createdAt: string; // ISO
+	type: 'text' | 'image' | 'video';
+	body: string; // text 本文 or メディア URL
+	thumbnailUrl?: string; // video 用
 };
 ```
 
@@ -154,6 +157,7 @@ type Message = {
 ## 6. Features
 
 ### 6.1 メッセージ表示
+
 - **テキスト**: 改行保持、URL 自動リンク化なし（要件外）
 - **画像**: `<img>` インライン表示、クリックでモーダル等倍プレビュー
 - **動画**: `<video controls>` で埋め込み再生
@@ -161,6 +165,7 @@ type Message = {
 - 編集 / リアクション / 引用 / メンション / 絵文字 / ファイル添付 / URL プレビュー: **すべて除外**
 
 ### 6.2 プッシュ通知（モック）
+
 - `settings/account` に「通知を有効にする」トグル
   - クリック時 `Notification.requestPermission()` を呼ぶ
   - 許可済み / 拒否済み / 未設定 をバッジ表示
@@ -168,14 +173,17 @@ type Message = {
 - バックエンド連携なし
 
 ### 6.3 チャット退会 / 再入会
+
 - チャット設定画面に「このチャットから退会する」ボタン
 - 確認ダイアログ後、`leaveChat(chatId)` → `isArchived = true`
 - `archive` 画面で一覧表示、「再入会」ボタンで `rejoinChat(chatId)` → `isArchived = false`
 
 ### 6.4 アプリから退会
+
 - `settings/delete` で確認後、`alert('退会処理が完了しました')` 程度（モック）
 
 ### 6.5 認証
+
 - ログイン / 新規登録フォームは UI のみ
 - submit は `alert()` でモック挙動、その後 `/design-{x}/chats` へ遷移
 
